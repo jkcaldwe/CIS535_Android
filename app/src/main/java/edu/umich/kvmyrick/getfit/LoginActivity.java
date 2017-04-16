@@ -71,12 +71,13 @@ public class LoginActivity extends AppCompatActivity {
                                     jsonResponse = new JSONObject(obj.toString());
                                     success = jsonResponse.getBoolean("success");
                                 if (success) {
-                                    Log.d("Result1", "true");
+                                    Log.d("LogIn Result", "true");
                                     Intent UserAreaActivityIntent = new Intent(LoginActivity.this, UserAreaActivity.class);
+                                    UserAreaActivityIntent.putExtra("EXTRA_FIRST_NAME", jsonResponse.getString("FirstName"));
                                     LoginActivity.this.startActivity(UserAreaActivityIntent);
                                 }
                                 else {
-                                    Log.d("Result1", "false");
+                                    Log.d("LogIn Result", "false");
                                     loginWarning.setEnabled(false);
                                     loginWarning.setVisibility(View.VISIBLE);
                                 }
@@ -91,43 +92,10 @@ public class LoginActivity extends AppCompatActivity {
                         catch (InterruptedException e) {
                             e.printStackTrace();
                         }
-                    Log.d("Result1", obj.toString());
-
+                    //Log.d("PHP Result", obj.toString());
                 }
             });
 
-
-            Response.Listener<String> responseListener = new Response.Listener<String>() {
-                @Override
-                public void onResponse(String response) {
-                    try {
-                        JSONObject jsonResponse = new JSONObject(response);
-                        boolean success = jsonResponse.getBoolean("success");
-
-                        if (success) {
-                            Intent UserAreaActivityIntent = new Intent(LoginActivity.this, UserAreaActivity.class);
-                            LoginActivity.this.startActivity(UserAreaActivityIntent);
-                        }
-                        else {
-                            AlertDialog alertDialog = new AlertDialog.Builder(LoginActivity.this).create();
-                            alertDialog.setTitle("Login Failed");
-                            alertDialog.setMessage("Username or Password is inccorect.");
-                            alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "Retry",
-                                    new DialogInterface.OnClickListener() {
-                                        public void onClick(DialogInterface dialog, int which) {
-                                            dialog.dismiss();
-                                        }
-                                    });
-                            alertDialog.show();
-                        }
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-
-                }
-
-                ;
-            };
         }
     }
 }
