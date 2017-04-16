@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 
 import com.android.volley.Response;
 
@@ -20,6 +21,7 @@ import java.util.concurrent.ExecutionException;
 
 @SuppressWarnings("unused")
 public class RegisterActivity extends AppCompatActivity {
+    private Boolean UniqueID = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,12 +36,22 @@ public class RegisterActivity extends AppCompatActivity {
         final EditText etpassword = (EditText) findViewById(R.id.etpassword);
         final EditText etweight = (EditText) findViewById(R.id.etweight);
         final Button bRegister = (Button) findViewById(R.id.bRegister);
+        final ImageView userID_Image = (ImageView) findViewById(R.id.UserID_Image);
+        final EditText errorText = (EditText) findViewById(R.id.errorText);
+
 
         bRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 PHPInterface php = new PHPInterface();
                 //Call using: php.execute("RegisterUser", "userID", "FirstName", "LastName", "EMail", "Age", "Weight", "Password");
+                if (!UniqueID){
+                    Log.d("UniqueID", "false");
+                    errorText.setText("This UserID is already taken. Please choose another.");
+                    errorText.setEnabled(false);
+                    errorText.setVisibility(View.VISIBLE);
+                    return;
+                }
                 php.execute("RegisterUser", etuserID.getText(), etfName.getText(), etlName.getText(), etemail.getText(), etage.getText(), etweight.getText(), etpassword.getText());
                 Object obj = null;
                 boolean success = false;
@@ -56,6 +68,9 @@ public class RegisterActivity extends AppCompatActivity {
                         }
                         else {
                             Log.d("Result1", "false");
+                            errorText.setText("Please enter all information to register.");
+                            errorText.setEnabled(false);
+                            errorText.setVisibility(View.VISIBLE);
                         }
                     }
                     catch (JSONException e) {
@@ -87,18 +102,18 @@ public class RegisterActivity extends AppCompatActivity {
                 try {
                     obj = php.get();
                     if (obj.toString().contains("true")) {
-                        Log.d("IF_Result", "true");
+                        userID_Image.setImageResource(R.drawable.green_check);
+                        UniqueID = true;
                     }
                     else {
-                        Log.d("IF_Result", "false");
+                        userID_Image.setImageResource(R.drawable.red_x);
+                        UniqueID = false;
                     }
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 } catch (ExecutionException e) {
                     e.printStackTrace();
                 }
-
-                Log.d("PHP_Result", obj.toString());
             }
         });
 
