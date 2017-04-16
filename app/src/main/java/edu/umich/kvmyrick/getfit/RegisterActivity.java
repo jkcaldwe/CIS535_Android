@@ -81,7 +81,24 @@ public class RegisterActivity extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable s) {
-                Log.d("Result1", etuserID.getText().toString());
+                PHPInterface php = new PHPInterface();
+                php.execute("UniqueUserID", s.toString());
+                Object obj = null;
+                try {
+                    obj = php.get();
+                    if (obj.toString().contains("true")) {
+                        Log.d("IF_Result", "true");
+                    }
+                    else {
+                        Log.d("IF_Result", "false");
+                    }
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                } catch (ExecutionException e) {
+                    e.printStackTrace();
+                }
+
+                Log.d("PHP_Result", obj.toString());
             }
         });
 

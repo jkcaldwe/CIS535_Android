@@ -47,6 +47,18 @@ public class PHPInterface extends AsyncTask {
                 e.printStackTrace();
             }
         }
+        //if the method is UniqueUserID
+        //call using: php.execute("UniqueUserID", "userID");
+        else if(method.toString() == "UniqueUserID") {
+            link += "?method=" + method;
+            String userID = params[1].toString();
+            try {
+                data  = URLEncoder.encode("UserID", "UTF-8") + "=" +
+                        URLEncoder.encode(userID, "UTF-8");
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+            }
+        }
         //if the method is RegisterUser - working
         //Call using: php.execute("RegisterUser", "userID", "FirstName", "LastName", "EMail", "Age", "Weight", "Password");
         else if(method.toString() == "RegisterUser") {
