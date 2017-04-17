@@ -66,20 +66,28 @@ public class LoginActivity extends AppCompatActivity {
                     boolean success = false;
                         try {
                             obj = php.get();
+                            if (obj.toString()=="fail") {
+                                loginWarning.setText("Failed to connect to server.");
+                                loginWarning.setEnabled(false);
+                                loginWarning.setVisibility(View.VISIBLE);
+                                return;
+                            }
                             JSONObject jsonResponse = null;
                                 try {
                                     jsonResponse = new JSONObject(obj.toString());
                                     success = jsonResponse.getBoolean("success");
-                                if (success) {
-                                    Log.d("LogIn Result", "true");
-                                    Intent UserAreaActivityIntent = new Intent(LoginActivity.this, UserAreaActivity.class);
-                                    UserAreaActivityIntent.putExtra("EXTRA_FIRST_NAME", jsonResponse.getString("FirstName"));
-                                    LoginActivity.this.startActivity(UserAreaActivityIntent);
-                                }
-                                else {
-                                    Log.d("LogIn Result", "false");
-                                    loginWarning.setEnabled(false);
-                                    loginWarning.setVisibility(View.VISIBLE);
+                                    if (success) {
+                                        Log.d("LogIn Result", "true");
+                                        Intent UserAreaActivityIntent = new Intent(LoginActivity.this, UserAreaActivity.class);
+                                        UserAreaActivityIntent.putExtra("EXTRA_FIRST_NAME", jsonResponse.getString("FirstName"));
+                                        UserAreaActivityIntent.putExtra("EXTRA_UID", jsonResponse.getString("UserID"));
+                                        LoginActivity.this.startActivity(UserAreaActivityIntent);
+                                    }
+                                    else {
+                                        Log.d("LogIn Result", "false");
+                                        loginWarning.setText("Login Failed.  Please check your username and password and try again.");
+                                        loginWarning.setEnabled(false);
+                                        loginWarning.setVisibility(View.VISIBLE);
                                 }
                             }
                             catch (JSONException e) {
@@ -95,7 +103,6 @@ public class LoginActivity extends AppCompatActivity {
                     //Log.d("PHP Result", obj.toString());
                 }
             });
-
         }
     }
 }
