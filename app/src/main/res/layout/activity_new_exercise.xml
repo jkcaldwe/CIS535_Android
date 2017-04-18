@@ -142,7 +142,7 @@
         android:layout_marginTop="0dp"
         android:ems="10"
         android:hint="Sets"
-        android:inputType="textPersonName"
+        android:inputType="number"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/RepsText" />

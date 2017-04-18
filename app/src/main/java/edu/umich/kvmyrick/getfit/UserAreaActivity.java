@@ -1,24 +1,15 @@
 package edu.umich.kvmyrick.getfit;
 
 import android.content.Intent;
-import android.icu.text.DateFormat;
 import android.icu.text.SimpleDateFormat;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CalendarView;
 import android.widget.EditText;
 import android.widget.TextView;
-
-import java.util.Calendar;
-import java.util.Date;
-
-import static edu.umich.kvmyrick.getfit.R.id.bNewExercise;
-import static edu.umich.kvmyrick.getfit.R.id.bNewexercise;
-import static edu.umich.kvmyrick.getfit.R.id.calendarView;
 
 @SuppressWarnings("unused")
 public class UserAreaActivity extends AppCompatActivity {

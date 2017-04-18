@@ -102,6 +102,7 @@ public class NewExerciseActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent UserAreaIntent = new Intent(NewExerciseActivity.this, UserAreaActivity.class);
                 UserAreaIntent.putExtra("EXTRA_FIRST_NAME", getIntent().getStringExtra("EXTRA_FIRST_NAME"));
+                UserAreaIntent.putExtra("EXTRA_UID", getIntent().getStringExtra("EXTRA_UID"));
                 NewExerciseActivity.this.startActivity(UserAreaIntent);
             }
         });
