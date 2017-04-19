@@ -60,6 +60,8 @@
         android:text="Welcome"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
         android:textColor="?attr/colorControlNormal"
+        android:textSize="30sp"
+        android:textStyle="bold"
         app:layout_constraintLeft_toRightOf="@+id/imageView3"
         app:layout_constraintTop_toTopOf="parent" />
 

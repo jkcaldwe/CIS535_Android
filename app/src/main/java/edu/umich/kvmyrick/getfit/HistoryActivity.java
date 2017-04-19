@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ScrollView;
@@ -35,8 +36,9 @@ public class HistoryActivity extends AppCompatActivity {
         final Button backButton = (Button) findViewById(R.id.backButton);
         final TextView introText = (TextView) findViewById(R.id.introText);
         final ListView listView = (ListView) findViewById(R.id.listView);
+        final EditText histWarnText = (EditText) findViewById(R.id.histWarnText);
 
-
+        histWarnText.setVisibility(View.INVISIBLE);
         introText.setEnabled(false);
         introText.setText("Select an exercise completed on " + getIntent().getIntExtra("EXTRA_MONTH", 0) + "/" + getIntent().getIntExtra("EXTRA_DAY", 0) + "/" + getIntent().getIntExtra("EXTRA_YEAR", 0) + " to see details");
 
@@ -60,7 +62,10 @@ public class HistoryActivity extends AppCompatActivity {
                     }
                 }
                 else {
-                    //nothing in array
+                    listView.setVisibility(View.INVISIBLE);
+                    histWarnText.setEnabled(false);
+                    histWarnText.setVisibility(View.VISIBLE);
+                    histWarnText.setText("There are no activities entered for this date.  Please go back and enter an activity for this date.");
                 }
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -82,10 +87,22 @@ public class HistoryActivity extends AppCompatActivity {
                 Log.d("List Result", String.valueOf(position));
                 try {
                     JSONObject tempObj = exercises.getJSONObject(position);
-                    Log.d("List Weight", String.valueOf(tempObj.getInt("Weight")));
-                    Log.d("List Reps", String.valueOf(tempObj.getInt("Reps")));
-                    Log.d("List Sets", String.valueOf(tempObj.getInt("Sets")));
-                    Log.d("List ID", String.valueOf(tempObj.getInt("ExerciseID")));
+//                    Log.d("List Weight", String.valueOf(tempObj.getInt("Weight")));
+//                    Log.d("List Reps", String.valueOf(tempObj.getInt("Reps")));
+//                    Log.d("List Sets", String.valueOf(tempObj.getInt("Sets")));
+//                    Log.d("List ID", String.valueOf(tempObj.getInt("ExerciseID")));
+                    Intent History2Intent = new Intent(HistoryActivity.this, HistoryActivity2.class);
+                    History2Intent.putExtra("EXTRA_FIRST_NAME", getIntent().getStringExtra("EXTRA_FIRST_NAME"));
+                    History2Intent.putExtra("EXTRA_UID", getIntent().getStringExtra("EXTRA_UID"));
+                    History2Intent.putExtra("EXTRA_DAY", getIntent().getIntExtra("EXTRA_DAY", 0));
+                    History2Intent.putExtra("EXTRA_MONTH", getIntent().getIntExtra("EXTRA_MONTH", 0));
+                    History2Intent.putExtra("EXTRA_YEAR", getIntent().getIntExtra("EXTRA_YEAR", 0));
+                    History2Intent.putExtra("EXTRA_WEIGHT", tempObj.getInt("Weight"));
+                    History2Intent.putExtra("EXTRA_REPS", tempObj.getInt("Reps"));
+                    History2Intent.putExtra("EXTRA_SETS", tempObj.getInt("Sets"));
+                    History2Intent.putExtra("EXTRA_EXERCISE_ID", tempObj.getInt("ExerciseID"));
+                    History2Intent.putExtra("EXTRA_EXERCISE_Name", tempObj.getString("ExerciseName"));
+                    HistoryActivity.this.startActivity(History2Intent);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }

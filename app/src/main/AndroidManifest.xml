@@ -23,8 +23,8 @@
         <activity android:name=".UserAreaActivity" />
         <activity android:name=".InfoActivity" />
         <activity android:name=".HistoryActivity" />
-        <activity android:name=".NewExerciseActivity"></activity>
+        <activity android:name=".NewExerciseActivity" />
+        <activity android:name=".HistoryActivity2"></activity>
     </application>
 
-
-    </manifest>
+</manifest>

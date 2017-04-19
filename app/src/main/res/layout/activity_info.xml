@@ -15,6 +15,7 @@
         android:textAlignment="center"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
         android:textColor="?attr/colorControlNormal"
+        android:textStyle="bold"
         android:visibility="visible"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -36,11 +37,11 @@
 
     <TextView
         android:id="@+id/textView4"
-        android:layout_width="323dp"
-        android:layout_height="50dp"
+        android:layout_width="339dp"
+        android:layout_height="45dp"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="0dp"
         android:text="Contact: jkcaldwe@umich.edu"
         android:textSize="18sp"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -54,7 +55,7 @@
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginTop="254dp"
-        android:text="Button"
+        android:text="Back"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView4" />
