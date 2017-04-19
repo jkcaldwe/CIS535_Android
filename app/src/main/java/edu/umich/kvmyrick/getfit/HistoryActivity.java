@@ -87,10 +87,6 @@ public class HistoryActivity extends AppCompatActivity {
                 Log.d("List Result", String.valueOf(position));
                 try {
                     JSONObject tempObj = exercises.getJSONObject(position);
-//                    Log.d("List Weight", String.valueOf(tempObj.getInt("Weight")));
-//                    Log.d("List Reps", String.valueOf(tempObj.getInt("Reps")));
-//                    Log.d("List Sets", String.valueOf(tempObj.getInt("Sets")));
-//                    Log.d("List ID", String.valueOf(tempObj.getInt("ExerciseID")));
                     Intent History2Intent = new Intent(HistoryActivity.this, HistoryActivity2.class);
                     History2Intent.putExtra("EXTRA_FIRST_NAME", getIntent().getStringExtra("EXTRA_FIRST_NAME"));
                     History2Intent.putExtra("EXTRA_UID", getIntent().getStringExtra("EXTRA_UID"));

@@ -133,6 +133,22 @@ public class PHPInterface extends AsyncTask {
                 e.printStackTrace();
             }
         }
+        //when method is DeleteActivity - working
+        //Call using: php.execute("DeleteActivity", "userID", "ActivityID");
+        else if(method.toString() == "DeleteActivity") {
+            link += "?method=" + method;
+            String userID = params[1].toString();
+            String ActivityID = params[2].toString();
+
+            try {
+                data  = URLEncoder.encode("UserID", "UTF-8") + "=" +
+                        URLEncoder.encode(userID, "UTF-8");
+                data += "&" + URLEncoder.encode("ActivityID", "UTF-8") + "=" +
+                        URLEncoder.encode(ActivityID, "UTF-8");
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+            }
+        }
 
         //main method to send data to server and get response
         try {
