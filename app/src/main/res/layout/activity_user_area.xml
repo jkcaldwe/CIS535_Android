@@ -55,12 +55,13 @@
         android:id="@+id/tvWelcomeMsg"
         android:layout_width="300dp"
         android:layout_height="50dp"
+        android:layout_marginLeft="-10dp"
+        android:layout_marginTop="16dp"
         android:text="Welcome"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="16dp"
+        android:textColor="?attr/colorControlNormal"
         app:layout_constraintLeft_toRightOf="@+id/imageView3"
-        android:layout_marginLeft="-10dp" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <CalendarView
         android:id="@+id/calendarView"

@@ -24,20 +24,21 @@ import java.util.concurrent.ExecutionException;
 @SuppressWarnings("unused")
 public class HistoryActivity extends AppCompatActivity {
 
+    ArrayList <String> exerciseNameList = new ArrayList<String>();
+    JSONArray exercises;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_history);
 
         final Button backButton = (Button) findViewById(R.id.backButton);
-        final Button exerciseDetails = (Button) findViewById(R.id.viewDetailsButton);
         final TextView introText = (TextView) findViewById(R.id.introText);
         final ListView listView = (ListView) findViewById(R.id.listView);
-//        final ScrollView ScrollList = (ScrollView) findViewById(R.id.scrollView2);
-//        final LinearLayout layout = (LinearLayout) findViewById(R.id.linearLayout);
+
 
         introText.setEnabled(false);
-        introText.setText("Select exercise completed on " + getIntent().getIntExtra("EXTRA_MONTH", 0) + "/" + getIntent().getIntExtra("EXTRA_DAY", 0) + "/" + getIntent().getIntExtra("EXTRA_YEAR", 0) + " to see exercise details");
+        introText.setText("Select an exercise completed on " + getIntent().getIntExtra("EXTRA_MONTH", 0) + "/" + getIntent().getIntExtra("EXTRA_DAY", 0) + "/" + getIntent().getIntExtra("EXTRA_YEAR", 0) + " to see details");
 
         //php.execute("getActivityInfo ", "userID", "Date(YYYY-MM-DD)");
         String date = getIntent().getIntExtra("EXTRA_YEAR", 0) + "-" + getIntent().getIntExtra("EXTRA_MONTH", 0) + "-" + getIntent().getIntExtra("EXTRA_DAY", 0);
@@ -50,13 +51,17 @@ public class HistoryActivity extends AppCompatActivity {
             JSONObject jsonResponse = null;
             try {
                 jsonResponse = new JSONObject(obj.toString());
-                JSONArray exercises = jsonResponse.getJSONArray("activity_info");
+                exercises = jsonResponse.getJSONArray("activity_info");
                 Log.d("Array Length", String.valueOf(exercises.length()));
-//                if (success) {
-//                    Log.d("sucess Result", "true");
-//                } else {
-//                    Log.d("sucess Result", "false");
-//                }
+                if (exercises.length() !=0){
+                    for(int i=0; i < exercises.length(); ++i) {
+                        JSONObject tempObj = exercises.getJSONObject(i);
+                        exerciseNameList.add(tempObj.getString("ExerciseName"));
+                    }
+                }
+                else {
+                    //nothing in array
+                }
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -67,18 +72,23 @@ public class HistoryActivity extends AppCompatActivity {
         }
         Log.d("PHP Result", obj.toString());
 
-        ArrayList <String> myStringArray1 = new ArrayList<String>();
-        myStringArray1.add("something");
-        myStringArray1.add("next");
         ArrayAdapter<String> adaptor;
-        adaptor = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, myStringArray1);
+        adaptor = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, exerciseNameList);
         listView.setAdapter(adaptor);
-
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adaptor, View view, int position, long id) {
                 Log.d("List Result", String.valueOf(position));
+                try {
+                    JSONObject tempObj = exercises.getJSONObject(position);
+                    Log.d("List Weight", String.valueOf(tempObj.getInt("Weight")));
+                    Log.d("List Reps", String.valueOf(tempObj.getInt("Reps")));
+                    Log.d("List Sets", String.valueOf(tempObj.getInt("Sets")));
+                    Log.d("List ID", String.valueOf(tempObj.getInt("ExerciseID")));
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
             }
         });
 

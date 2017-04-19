@@ -8,22 +8,54 @@
 
     <TextView
         android:id="@+id/tvappinfo"
-        android:layout_width="230dp"
-        android:layout_height="43dp"
-        android:layout_marginTop="6dp"
-        android:text="Get Fit Info"
+        android:layout_width="333dp"
+        android:layout_height="67dp"
+        android:layout_marginTop="16dp"
+        android:text="Get Fit App Info"
+        android:textAlignment="center"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+        android:textColor="?attr/colorControlNormal"
         android:visibility="visible"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/tvInfo"
-        android:layout_width="310dp"
-        android:layout_height="206dp"
+        android:layout_width="339dp"
+        android:layout_height="45dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="9dp"
         android:text="Get Fit Version 1.0"
-        tools:layout_editor_absoluteX="40dp"
-        android:layout_marginTop="8dp"
+        android:textSize="18sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvappinfo" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="323dp"
+        android:layout_height="50dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="12dp"
+        android:text="Contact: jkcaldwe@umich.edu"
+        android:textSize="18sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvInfo" />
+
+    <Button
+        android:id="@+id/InfoBackButton"
+        android:layout_width="165dp"
+        android:layout_height="55dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="254dp"
+        android:text="Button"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView4" />
 </android.support.constraint.ConstraintLayout>
